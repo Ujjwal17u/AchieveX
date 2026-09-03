@@ -111,6 +111,28 @@ $projects = $projectStmt->get_result();
 
 
 /* =========================
+   GET CERTIFICATES
+========================= */
+
+$certificateStmt = $conn->prepare("
+    SELECT
+        id,
+        title,
+        issuer,
+        description,
+        certificate_date
+    FROM certificates
+    WHERE user_id = ?
+    ORDER BY certificate_date DESC, id DESC
+");
+
+$certificateStmt->bind_param("i", $userId);
+$certificateStmt->execute();
+
+$certificates = $certificateStmt->get_result();
+
+
+/* =========================
    SKILLS ARRAY
 ========================= */
 
@@ -910,6 +932,95 @@ body {
 }
 
 .date {
+
+    color:
+        #6b7280;
+
+    font-size:
+        12px;
+
+    margin-top:
+        9px;
+}
+
+
+/* =========================
+   CERTIFICATES
+========================= */
+
+.certificate {
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius:
+        11px;
+
+    padding:
+        18px;
+
+    margin-bottom:
+        13px;
+
+    background:
+        #fafafa;
+
+    transition:
+        .25s;
+}
+
+.certificate:last-child {
+
+    margin-bottom:
+        0;
+}
+
+.certificate:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,.07);
+}
+
+.certificate-title {
+
+    font-size:
+        17px;
+
+    font-weight:
+        bold;
+
+    margin-bottom:
+        7px;
+}
+
+.certificate-issuer {
+
+    color:
+        #4f46e5;
+
+    font-size:
+        14px;
+
+    font-weight:
+        bold;
+}
+
+.certificate-description {
+
+    color:
+        #4b5563;
+
+    margin-top:
+        10px;
+
+    line-height:
+        1.6;
+}
+
+.certificate-date {
 
     color:
         #6b7280;
@@ -1735,6 +1846,139 @@ body {
         </div>
 
 
+        <!-- =========================
+             CERTIFICATES
+        ========================= -->
+
+        <div class="section-card full">
+
+            <h3 class="section-title">
+
+                📜 Certificates
+
+            </h3>
+
+
+            <?php if (
+                $certificates->num_rows > 0
+            ): ?>
+
+
+                <?php while (
+                    $certificate =
+                    $certificates->fetch_assoc()
+                ): ?>
+
+
+                    <div class="certificate">
+
+
+                        <div class="certificate-title">
+
+                            📜
+
+                            <?php
+
+                            echo htmlspecialchars(
+                                $certificate["title"]
+                            );
+
+                            ?>
+
+                        </div>
+
+
+                        <?php if (
+                            !empty(
+                                $certificate["issuer"]
+                            )
+                        ): ?>
+
+                            <div class="certificate-issuer">
+
+                                Issued by:
+
+                                <?php
+
+                                echo htmlspecialchars(
+                                    $certificate["issuer"]
+                                );
+
+                                ?>
+
+                            </div>
+
+                        <?php endif; ?>
+
+
+                        <?php if (
+                            !empty(
+                                $certificate["description"]
+                            )
+                        ): ?>
+
+                            <div class="certificate-description">
+
+                                <?php
+
+                                echo nl2br(
+                                    htmlspecialchars(
+                                        $certificate["description"]
+                                    )
+                                );
+
+                                ?>
+
+                            </div>
+
+                        <?php endif; ?>
+
+
+                        <?php if (
+                            !empty(
+                                $certificate["certificate_date"]
+                            )
+                        ): ?>
+
+                            <div class="certificate-date">
+
+                                📅 Certificate Date:
+
+                                <?php
+
+                                echo htmlspecialchars(
+                                    $certificate["certificate_date"]
+                                );
+
+                                ?>
+
+                            </div>
+
+                        <?php endif; ?>
+
+
+                    </div>
+
+
+                <?php endwhile; ?>
+
+
+            <?php else: ?>
+
+
+                <div class="empty">
+
+                    No certificates added yet.
+
+                </div>
+
+
+            <?php endif; ?>
+
+
+        </div>
+
+
     </div>
 
 
@@ -1763,6 +2007,8 @@ body {
 $achievementStmt->close();
 
 $projectStmt->close();
+
+$certificateStmt->close();
 
 $conn->close();
 
