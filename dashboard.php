@@ -44,19 +44,12 @@ $stmt->close();
 ========================= */
 
 $user_name = $user["name"] ?? $_SESSION["user_name"] ?? "User";
-
 $user_username = $user["username"] ?? "";
-
 $user_bio = trim($user["bio"] ?? "");
-
 $user_education = trim($user["education"] ?? "");
-
 $user_skills = trim($user["skills"] ?? "");
-
 $user_linkedin = trim($user["linkedin_url"] ?? "");
-
 $user_github = trim($user["github_url"] ?? "");
-
 $user_profile_image = trim($user["profile_image"] ?? "");
 
 
@@ -148,25 +141,7 @@ $stmt->close();
    PROFILE COMPLETION
 ========================= */
 
-/*
-    8 profile/module checkpoints
-
-    1. Bio
-    2. Education
-    3. Profile Image
-    4. LinkedIn
-    5. GitHub
-    6. Achievement
-    7. Project
-    8. Skill / Certificate
-
-    Each checkpoint = 12.5%
-*/
-
 $completion_points = 0;
-
-
-/* Profile Information */
 
 if ($user_bio !== "") {
     $completion_points++;
@@ -188,9 +163,6 @@ if ($user_github !== "") {
     $completion_points++;
 }
 
-
-/* Portfolio Modules */
-
 if ($total_achievements > 0) {
     $completion_points++;
 }
@@ -199,15 +171,9 @@ if ($total_projects > 0) {
     $completion_points++;
 }
 
-if (
-    $total_skills > 0 ||
-    $total_certificates > 0
-) {
+if ($total_skills > 0 || $total_certificates > 0) {
     $completion_points++;
 }
-
-
-/* Calculate Percentage */
 
 $profile_completion = round(
     ($completion_points / 8) * 100
@@ -279,12 +245,7 @@ if ($user_username !== "") {
 
 <title>AchieveX Dashboard</title>
 
-
 <style>
-
-/* =========================
-   RESET
-========================= */
 
 * {
     margin: 0;
@@ -292,23 +253,10 @@ if ($user_username !== "") {
     box-sizing: border-box;
 }
 
-
-/* =========================
-   BODY
-========================= */
-
 body {
-
-    font-family:
-        Arial,
-        sans-serif;
-
-    background:
-        #f4f6f9;
-
-    color:
-        #111827;
-
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+    color: #111827;
 }
 
 
@@ -317,57 +265,31 @@ body {
 ========================= */
 
 .navbar {
-
-    height:
-        65px;
-
-    background:
-        #1f2937;
-
-    color:
-        white;
-
-    padding:
-        0 30px;
-
-    display:
-        flex;
-
-    justify-content:
-        space-between;
-
-    align-items:
-        center;
-
+    height: 65px;
+    background: #1f2937;
+    color: white;
+    padding: 0 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .navbar h2 {
-
-    font-size:
-        22px;
-
+    font-size: 22px;
 }
 
 .navbar span {
-
-    font-size:
-        15px;
-
+    font-size: 15px;
 }
 
 
 /* =========================
-   MAIN CONTAINER
+   CONTAINER
 ========================= */
 
 .container {
-
-    display:
-        flex;
-
-    min-height:
-        calc(100vh - 65px);
-
+    display: flex;
+    min-height: calc(100vh - 65px);
 }
 
 
@@ -376,57 +298,26 @@ body {
 ========================= */
 
 .sidebar {
-
-    width:
-        220px;
-
-    background:
-        #111827;
-
-    color:
-        white;
-
-    padding:
-        25px 20px;
-
-    flex-shrink:
-        0;
-
+    width: 220px;
+    background: #111827;
+    color: white;
+    padding: 25px 20px;
+    flex-shrink: 0;
 }
 
 .sidebar a {
-
-    display:
-        block;
-
-    color:
-        white;
-
-    text-decoration:
-        none;
-
-    padding:
-        12px 10px;
-
-    margin-bottom:
-        5px;
-
-    border-radius:
-        7px;
-
-    transition:
-        0.25s;
-
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 12px 10px;
+    margin-bottom: 5px;
+    border-radius: 7px;
+    transition: 0.25s;
 }
 
 .sidebar a:hover {
-
-    background:
-        #1f2937;
-
-    transform:
-        translateX(3px);
-
+    background: #1f2937;
+    transform: translateX(3px);
 }
 
 
@@ -435,36 +326,19 @@ body {
 ========================= */
 
 .content {
-
-    flex:
-        1;
-
-    padding:
-        35px;
-
-    max-width:
-        1100px;
-
+    flex: 1;
+    padding: 35px;
+    max-width: 1100px;
 }
 
 .content h1 {
-
-    font-size:
-        30px;
-
-    margin-bottom:
-        8px;
-
+    font-size: 30px;
+    margin-bottom: 8px;
 }
 
 .subtitle {
-
-    color:
-        #6b7280;
-
-    margin-bottom:
-        25px;
-
+    color: #6b7280;
+    margin-bottom: 25px;
 }
 
 
@@ -473,19 +347,10 @@ body {
 ========================= */
 
 .statistics {
-
-    display:
-        grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap:
-        18px;
-
-    margin-top:
-        25px;
-
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-top: 25px;
 }
 
 
@@ -494,42 +359,21 @@ body {
 ========================= */
 
 .stat-card {
-
-    display:
-        block;
-
-    background:
-        white;
-
-    padding:
-        24px;
-
-    border-radius:
-        12px;
-
-    text-decoration:
-        none;
-
-    color:
-        #111827;
-
-    box-shadow:
-        0 2px 8px rgba(0,0,0,0.08);
-
+    display: block;
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #111827;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     transition:
         transform .25s ease,
         box-shadow .25s ease;
-
 }
 
 .stat-card:hover {
-
-    transform:
-        translateY(-4px);
-
-    box-shadow:
-        0 8px 20px rgba(0,0,0,0.12);
-
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
 }
 
 
@@ -538,13 +382,8 @@ body {
 ========================= */
 
 .stat-icon {
-
-    font-size:
-        28px;
-
-    margin-bottom:
-        12px;
-
+    font-size: 28px;
+    margin-bottom: 12px;
 }
 
 
@@ -553,16 +392,9 @@ body {
 ========================= */
 
 .stat-title {
-
-    color:
-        #6b7280;
-
-    font-size:
-        14px;
-
-    margin-bottom:
-        7px;
-
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 7px;
 }
 
 
@@ -571,13 +403,25 @@ body {
 ========================= */
 
 .stat-number {
+    font-size: 30px;
+    font-weight: bold;
+}
 
-    font-size:
-        30px;
 
-    font-weight:
-        bold;
+/* =========================
+   STAT LINK
+========================= */
 
+.stat-link {
+    margin-top: 12px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #4f46e5;
+    transition: 0.25s;
+}
+
+.stat-card:hover .stat-link {
+    transform: translateX(4px);
 }
 
 
@@ -586,61 +430,29 @@ body {
 ========================= */
 
 .completion-section {
-
-    margin-top:
-        30px;
-
-    background:
-        white;
-
-    padding:
-        25px;
-
-    border-radius:
-        12px;
-
-    box-shadow:
-        0 2px 8px rgba(0,0,0,0.08);
-
+    margin-top: 30px;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .completion-header {
-
-    display:
-        flex;
-
-    justify-content:
-        space-between;
-
-    align-items:
-        center;
-
-    gap:
-        15px;
-
-    margin-bottom:
-        15px;
-
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
 }
 
 .completion-header h2 {
-
-    font-size:
-        21px;
-
+    font-size: 21px;
 }
 
 .completion-percentage {
-
-    font-size:
-        24px;
-
-    font-weight:
-        bold;
-
-    color:
-        #4f46e5;
-
+    font-size: 24px;
+    font-weight: bold;
+    color: #4f46e5;
 }
 
 
@@ -649,95 +461,42 @@ body {
 ========================= */
 
 .progress-container {
-
-    width:
-        100%;
-
-    height:
-        12px;
-
-    background:
-        #e5e7eb;
-
-    border-radius:
-        20px;
-
-    overflow:
-        hidden;
-
+    width: 100%;
+    height: 12px;
+    background: #e5e7eb;
+    border-radius: 20px;
+    overflow: hidden;
 }
 
 .progress-bar {
-
-    height:
-        100%;
-
-    width:
-        <?php echo $profile_completion; ?>%;
-
-    background:
-        #4f46e5;
-
-    border-radius:
-        20px;
-
-    transition:
-        width .5s ease;
-
+    height: 100%;
+    width: <?php echo $profile_completion; ?>%;
+    background: #4f46e5;
+    border-radius: 20px;
+    transition: width .5s ease;
 }
 
 .completion-message {
-
-    margin-top:
-        12px;
-
-    color:
-        #6b7280;
-
-    line-height:
-        1.6;
-
+    margin-top: 12px;
+    color: #6b7280;
+    line-height: 1.6;
 }
 
 .improve-button {
-
-    display:
-        inline-block;
-
-    margin-top:
-        15px;
-
-    padding:
-        10px 17px;
-
-    background:
-        #4f46e5;
-
-    color:
-        white;
-
-    text-decoration:
-        none;
-
-    border-radius:
-        7px;
-
-    font-weight:
-        bold;
-
-    transition:
-        .25s;
-
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 17px;
+    background: #4f46e5;
+    color: white;
+    text-decoration: none;
+    border-radius: 7px;
+    font-weight: bold;
+    transition: .25s;
 }
 
 .improve-button:hover {
-
-    background:
-        #4338ca;
-
-    transform:
-        translateY(-2px);
-
+    background: #4338ca;
+    transform: translateY(-2px);
 }
 
 
@@ -746,161 +505,82 @@ body {
 ========================= */
 
 .quick-section {
-
-    margin-top:
-        35px;
-
+    margin-top: 35px;
 }
 
 .quick-section h2 {
-
-    font-size:
-        21px;
-
-    margin-bottom:
-        15px;
-
+    font-size: 21px;
+    margin-bottom: 15px;
 }
 
 .quick-actions {
-
-    display:
-        flex;
-
-    gap:
-        12px;
-
-    flex-wrap:
-        wrap;
-
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
 .quick-actions a {
-
-    display:
-        inline-block;
-
-    background:
-        #1f2937;
-
-    color:
-        white;
-
-    text-decoration:
-        none;
-
-    padding:
-        11px 17px;
-
-    border-radius:
-        8px;
-
-    font-weight:
-        bold;
-
-    transition:
-        .25s;
-
+    display: inline-block;
+    background: #1f2937;
+    color: white;
+    text-decoration: none;
+    padding: 11px 17px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: .25s;
 }
 
 .quick-actions a:hover {
-
-    background:
-        #111827;
-
-    transform:
-        translateY(-2px);
-
+    background: #111827;
+    transform: translateY(-2px);
 }
 
 
 /* =========================
-   PROFILE ACTION
+   PUBLIC PROFILE
 ========================= */
 
 .profile-section {
-
-    margin-top:
-        35px;
-
-    background:
-        white;
-
-    border-radius:
-        12px;
-
-    padding:
-        25px;
-
-    box-shadow:
-        0 2px 8px rgba(0,0,0,0.08);
-
+    margin-top: 35px;
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .profile-section h2 {
-
-    margin-bottom:
-        8px;
-
+    margin-bottom: 8px;
 }
 
 .profile-section p {
-
-    color:
-        #6b7280;
-
-    line-height:
-        1.6;
-
+    color: #6b7280;
+    line-height: 1.6;
 }
 
 .profile-button {
-
-    display:
-        inline-block;
-
-    margin-top:
-        15px;
-
-    padding:
-        10px 17px;
-
-    background:
-        #4f46e5;
-
-    color:
-        white;
-
-    text-decoration:
-        none;
-
-    border-radius:
-        7px;
-
-    font-weight:
-        bold;
-
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 17px;
+    background: #4f46e5;
+    color: white;
+    text-decoration: none;
+    border-radius: 7px;
+    font-weight: bold;
 }
 
 .profile-button:hover {
-
-    background:
-        #4338ca;
-
+    background: #4338ca;
 }
 
 
 /* =========================
-   MOBILE
+   RESPONSIVE
 ========================= */
 
 @media (max-width: 900px) {
 
     .statistics {
-
-        grid-template-columns:
-            repeat(2, 1fr);
-
+        grid-template-columns: repeat(2, 1fr);
     }
 
 }
@@ -909,84 +589,45 @@ body {
 @media (max-width: 600px) {
 
     .container {
-
-        display:
-            block;
-
+        display: block;
     }
 
     .sidebar {
-
-        width:
-            100%;
-
-        min-height:
-            auto;
-
-        display:
-            flex;
-
-        overflow-x:
-            auto;
-
-        gap:
-            5px;
-
-        padding:
-            10px;
-
+        width: 100%;
+        min-height: auto;
+        display: flex;
+        overflow-x: auto;
+        gap: 5px;
+        padding: 10px;
     }
 
     .sidebar a {
-
-        white-space:
-            nowrap;
-
-        margin:
-            0;
-
+        white-space: nowrap;
+        margin: 0;
     }
 
     .content {
-
-        padding:
-            20px 15px;
-
+        padding: 20px 15px;
     }
 
     .content h1 {
-
-        font-size:
-            25px;
-
+        font-size: 25px;
     }
 
     .statistics {
-
-        grid-template-columns:
-            1fr;
-
+        grid-template-columns: 1fr;
     }
 
     .navbar {
-
-        padding:
-            0 15px;
-
+        padding: 0 15px;
     }
 
     .navbar span {
-
-        display:
-            none;
-
+        display: none;
     }
 
     .completion-header {
-
-        align-items:
-            flex-start;
-
+        align-items: flex-start;
     }
 
 }
@@ -995,13 +636,10 @@ body {
 
 </head>
 
-
 <body>
 
 
-<!-- =========================
-     NAVBAR
-========================= -->
+<!-- NAVBAR -->
 
 <div class="navbar">
 
@@ -1012,11 +650,7 @@ body {
     <span>
 
         <?php
-
-        echo htmlspecialchars(
-            $user_name
-        );
-
+        echo htmlspecialchars($user_name);
         ?>
 
     </span>
@@ -1024,356 +658,339 @@ body {
 </div>
 
 
-
-<!-- =========================
-     MAIN
-========================= -->
-
 <div class="container">
 
 
-    <!-- =========================
-         SIDEBAR
-    ========================= -->
+<!-- SIDEBAR -->
 
-    <div class="sidebar">
+<div class="sidebar">
 
-        <a href="dashboard.php">
-            Dashboard
-        </a>
+    <a href="dashboard.php">
+        Dashboard
+    </a>
 
-        <a href="achievements.php">
-            🏆 Achievements
-        </a>
+    <a href="achievements.php">
+        🏆 Achievements
+    </a>
 
-        <a href="certificates.php">
-            📜 Certificates
-        </a>
+    <a href="certificates.php">
+        📜 Certificates
+    </a>
 
-        <a href="projects.php">
-            💻 Projects
-        </a>
+    <a href="projects.php">
+        💻 Projects
+    </a>
 
-        <a href="skills.php">
-            🛠 Skills
-        </a>
+    <a href="skills.php">
+        🛠 Skills
+    </a>
 
-        <a href="profile.php">
-            👤 My Profile
-        </a>
+    <a href="profile.php">
+        👤 My Profile
+    </a>
 
-        <a href="logout.php">
-            Logout
-        </a>
+    <a href="logout.php">
+        Logout
+    </a>
+
+</div>
+
+
+<!-- CONTENT -->
+
+<div class="content">
+
+
+<h1>
+
+    Welcome back,
+    <?php
+    echo htmlspecialchars($user_name);
+    ?>
+    👋
+
+</h1>
+
+
+<p class="subtitle">
+
+    Manage your achievements
+    and build your professional
+    portfolio.
+
+</p>
+
+
+<!-- STATISTICS -->
+
+<div class="statistics">
+
+
+    <!-- ACHIEVEMENTS -->
+
+    <a
+        href="achievements.php"
+        class="stat-card"
+    >
+
+        <div class="stat-icon">
+            🏆
+        </div>
+
+        <div class="stat-title">
+            Achievements
+        </div>
+
+        <div class="stat-number">
+
+            <?php
+            echo $total_achievements;
+            ?>
+
+        </div>
+
+        <div class="stat-link">
+            View →
+        </div>
+
+    </a>
+
+
+    <!-- CERTIFICATES -->
+
+    <a
+        href="certificates.php"
+        class="stat-card"
+    >
+
+        <div class="stat-icon">
+            📜
+        </div>
+
+        <div class="stat-title">
+            Certificates
+        </div>
+
+        <div class="stat-number">
+
+            <?php
+            echo $total_certificates;
+            ?>
+
+        </div>
+
+        <div class="stat-link">
+            View →
+        </div>
+
+    </a>
+
+
+    <!-- PROJECTS -->
+
+    <a
+        href="projects.php"
+        class="stat-card"
+    >
+
+        <div class="stat-icon">
+            💻
+        </div>
+
+        <div class="stat-title">
+            Projects
+        </div>
+
+        <div class="stat-number">
+
+            <?php
+            echo $total_projects;
+            ?>
+
+        </div>
+
+        <div class="stat-link">
+            View →
+        </div>
+
+    </a>
+
+
+    <!-- SKILLS -->
+
+    <a
+        href="skills.php"
+        class="stat-card"
+    >
+
+        <div class="stat-icon">
+            🛠
+        </div>
+
+        <div class="stat-title">
+            Skills
+        </div>
+
+        <div class="stat-number">
+
+            <?php
+            echo $total_skills;
+            ?>
+
+        </div>
+
+        <div class="stat-link">
+            View →
+        </div>
+
+    </a>
+
+
+</div>
+
+
+<!-- PROFILE COMPLETION -->
+
+<div class="completion-section">
+
+    <div class="completion-header">
+
+        <h2>
+            📈 Profile Completion
+        </h2>
+
+        <div class="completion-percentage">
+
+            <?php
+            echo $profile_completion;
+            ?>%
+
+        </div>
 
     </div>
 
 
+    <div class="progress-container">
 
-    <!-- =========================
-         CONTENT
-    ========================= -->
+        <div class="progress-bar"></div>
 
-    <div class="content">
+    </div>
 
 
-        <h1>
+    <p class="completion-message">
 
-            Welcome back,
-            <?php
+        <?php
+        echo htmlspecialchars(
+            $completion_message
+        );
+        ?>
 
-            echo htmlspecialchars(
-                $user_name
-            );
+    </p>
 
-            ?>
 
-            👋
+    <?php if ($profile_completion < 100): ?>
 
-        </h1>
+        <a
+            href="profile.php"
+            class="improve-button"
+        >
+            Complete Profile →
+        </a>
 
+    <?php else: ?>
 
-        <p class="subtitle">
-
-            Manage your achievements
-            and build your professional
-            portfolio.
-
-        </p>
-
-
-
-        <!-- =========================
-             STATISTICS
-        ========================= -->
-
-        <div class="statistics">
-
-
-            <!-- ACHIEVEMENTS -->
-
-            <a
-                href="achievements.php"
-                class="stat-card"
-            >
-
-                <div class="stat-icon">
-                    🏆
-                </div>
-
-                <div class="stat-title">
-                    Achievements
-                </div>
-
-                <div class="stat-number">
-
-                    <?php
-                    echo $total_achievements;
-                    ?>
-
-                </div>
-
-            </a>
-
-
-
-            <!-- CERTIFICATES -->
-
-            <a
-                href="certificates.php"
-                class="stat-card"
-            >
-
-                <div class="stat-icon">
-                    📜
-                </div>
-
-                <div class="stat-title">
-                    Certificates
-                </div>
-
-                <div class="stat-number">
-
-                    <?php
-                    echo $total_certificates;
-                    ?>
-
-                </div>
-
-            </a>
-
-
-
-            <!-- PROJECTS -->
-
-            <a
-                href="projects.php"
-                class="stat-card"
-            >
-
-                <div class="stat-icon">
-                    💻
-                </div>
-
-                <div class="stat-title">
-                    Projects
-                </div>
-
-                <div class="stat-number">
-
-                    <?php
-                    echo $total_projects;
-                    ?>
-
-                </div>
-
-            </a>
-
-
-
-            <!-- SKILLS -->
-
-            <a
-                href="skills.php"
-                class="stat-card"
-            >
-
-                <div class="stat-icon">
-                    🛠
-                </div>
-
-                <div class="stat-title">
-                    Skills
-                </div>
-
-                <div class="stat-number">
-
-                    <?php
-                    echo $total_skills;
-                    ?>
-
-                </div>
-
-            </a>
-
-
-        </div>
-
-
-
-        <!-- =========================
-             PROFILE COMPLETION
-        ========================= -->
-
-        <div class="completion-section">
-
-            <div class="completion-header">
-
-                <h2>
-                    📈 Profile Completion
-                </h2>
-
-                <div class="completion-percentage">
-
-                    <?php
-                    echo $profile_completion;
-                    ?>%
-
-                </div>
-
-            </div>
-
-
-            <div class="progress-container">
-
-                <div class="progress-bar"></div>
-
-            </div>
-
-
-            <p class="completion-message">
-
-                <?php
+        <a
+            href="<?php
                 echo htmlspecialchars(
-                    $completion_message
+                    $public_profile_url
                 );
-                ?>
+            ?>"
+            class="improve-button"
+        >
+            View Public Profile →
+        </a>
 
-            </p>
-
-
-            <?php if ($profile_completion < 100): ?>
-
-                <a
-                    href="profile.php"
-                    class="improve-button"
-                >
-                    Complete Profile →
-                </a>
-
-            <?php else: ?>
-
-                <a
-                    href="<?php
-                        echo htmlspecialchars(
-                            $public_profile_url
-                        );
-                    ?>"
-                    class="improve-button"
-                >
-                    View Public Profile →
-                </a>
-
-            <?php endif; ?>
+    <?php endif; ?>
 
 
-        </div>
+</div>
 
 
+<!-- QUICK ACTIONS -->
 
-        <!-- =========================
-             QUICK ACTIONS
-        ========================= -->
+<div class="quick-section">
 
-        <div class="quick-section">
-
-            <h2>
-                Quick Actions
-            </h2>
+    <h2>
+        Quick Actions
+    </h2>
 
 
-            <div class="quick-actions">
+    <div class="quick-actions">
 
-                <a href="add_achievement.php">
-                    + Add Achievement
-                </a>
+        <a href="add_achievement.php">
+            + Add Achievement
+        </a>
 
-                <a href="add_certificate.php">
-                    + Add Certificate
-                </a>
+        <a href="add_certificate.php">
+            + Add Certificate
+        </a>
 
-                <a href="add_project.php">
-                    + Add Project
-                </a>
+        <a href="add_project.php">
+            + Add Project
+        </a>
 
-                <a href="add_skill.php">
-                    + Add Skill
-                </a>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- =========================
-             PROFILE
-        ========================= -->
-
-        <div class="profile-section">
-
-            <h2>
-                👤 Your Public Profile
-            </h2>
-
-            <p>
-
-                Showcase your achievements,
-                certificates, projects and
-                skills through your AchieveX
-                public profile.
-
-            </p>
-
-
-            <a
-                href="<?php
-                    echo htmlspecialchars(
-                        $public_profile_url
-                    );
-                ?>"
-                class="profile-button"
-            >
-
-                View Public Profile →
-
-            </a>
-
-        </div>
-
+        <a href="add_skill.php">
+            + Add Skill
+        </a>
 
     </div>
 
 </div>
 
 
-</body>
+<!-- PUBLIC PROFILE -->
 
-</html>
+<div class="profile-section">
+
+    <h2>
+        👤 Your Public Profile
+    </h2>
+
+    <p>
+
+        Showcase your achievements,
+        certificates, projects and
+        skills through your AchieveX
+        public profile.
+
+    </p>
+
+
+    <a
+        href="<?php
+            echo htmlspecialchars(
+                $public_profile_url
+            );
+        ?>"
+        class="profile-button"
+    >
+
+        View Public Profile →
+
+    </a>
+
+</div>
+
+
+</div>
+
+</div>
 
 
 <?php
-
 $conn->close();
-
 ?>
+
+</body>
+
+</html>
